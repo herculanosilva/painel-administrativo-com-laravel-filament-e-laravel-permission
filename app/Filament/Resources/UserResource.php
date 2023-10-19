@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -37,7 +38,18 @@ class UserResource extends Resource
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create')
+                    ->required(fn (string $context): bool => $context === 'create'),
+                // Forms\Components\Select::make('roles')
+                //     ->multiple()
+                //     // ->relationship('roles','name'),
+                //     ->relationship(name: 'roles', titleAttribute: 'name'),
+
+                Forms\Components\Select::make('roles')
+                ->multiple()
+                ->relationship(name: 'roles', titleAttribute: 'name')
+                ->preload(),
+
+                    
             ]);
     }
 
