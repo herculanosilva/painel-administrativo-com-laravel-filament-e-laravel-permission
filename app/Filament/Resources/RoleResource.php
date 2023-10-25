@@ -26,9 +26,11 @@ class RoleResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                // Forms\Components\TextInput::make('guard_name')
-                //     ->required()
-                //     ->maxLength(255),
+                Forms\Components\Select::make('permissions')
+                    ->label('Permissões')
+                    ->multiple()
+                    ->relationship(name: 'permissions', titleAttribute: 'name')
+                    ->preload(),
             ]);
     }
 
@@ -40,6 +42,7 @@ class RoleResource extends Resource
                     ->label('Nome')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Ultima atualização')
                     ->dateTime('H:i:s d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

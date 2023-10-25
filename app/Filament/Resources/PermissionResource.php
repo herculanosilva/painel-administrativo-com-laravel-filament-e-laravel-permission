@@ -26,6 +26,11 @@ class PermissionResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('roles')
+                    ->label('Funções')
+                    ->multiple()
+                    ->relationship(name: 'roles', titleAttribute: 'name')
+                    ->preload(),
             ]);
     }
 
@@ -37,6 +42,7 @@ class PermissionResource extends Resource
                     ->label('Nome')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Ultima atualização')
                     ->dateTime('H:i:s d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
