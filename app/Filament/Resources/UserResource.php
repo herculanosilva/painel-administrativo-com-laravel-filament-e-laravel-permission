@@ -41,7 +41,9 @@ class UserResource extends Resource
                     ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\Select::make('roles')
                 ->multiple()
-                ->relationship(name: 'roles', titleAttribute: 'name')
+                ->relationship('roles', 'name', fn(Builder $query) =>
+                    auth()->user()->hasRole('Admin') ? null : $query->where('name','!=','Admin')
+                )
                 ->preload(),
             ]);
     }
@@ -91,5 +93,16 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }  
+    
+    // Verifica se o usuario é um admin para exibir admins somente para admin
+    public static function getEloquentQuery(): Builder
+    {
+        return auth()->user()->hasRole('Admin') 
+            ? parent::getEloquentQuery()
+            : parent::getEloquentQuery()->whereHas(
+                'roles',
+                fn (Builder $query) => $query->where('name','!=','Admin')
+            );
+    }
 }
