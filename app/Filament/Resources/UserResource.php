@@ -18,8 +18,13 @@ use Illuminate\Support\Facades\Hash;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    // Icone
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    // Personaliza as labels
+    protected static ?string $modelLabel = 'Usuário';
+    protected static ?string $pluralModelLabel = 'Usuários';
+    // Personaliza a URL 
+    protected static ?string $slug = 'usuario';
 
     public static function form(Form $form): Form
     {
@@ -32,6 +37,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('password')
                     ->label('Senha')

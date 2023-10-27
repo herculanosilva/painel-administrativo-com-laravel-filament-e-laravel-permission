@@ -16,8 +16,15 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // Icone
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
+    // Personaliza as labels
+    protected static ?string $modelLabel = 'Função';
+    protected static ?string $pluralModelLabel = 'Funções';
+    // Personaliza a URL 
+    protected static ?string $slug = 'funcao';
+    // Adiciona ao grupo de navegação
+    protected static ?string $navigationGroup = 'Configurações';
 
     public static function form(Form $form): Form
     {
@@ -25,6 +32,7 @@ class RoleResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Forms\Components\Select::make('permissions')
                     ->label('Permissões')
