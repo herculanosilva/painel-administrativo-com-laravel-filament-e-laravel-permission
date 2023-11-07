@@ -53,7 +53,7 @@ class RoleResource extends Resource
                     ->label('Ultima atualização')
                     ->since()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //

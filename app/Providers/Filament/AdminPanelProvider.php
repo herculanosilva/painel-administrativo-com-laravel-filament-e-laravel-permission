@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Pages\Auth\EditProfile as AuthEditProfile;
+use Illuminate\View\View;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -47,6 +48,11 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->renderHook(
+                'panels::body.end',
+                fn (): View => view('filament.pages.footer'),
+            )
+            ->viteTheme('resources/css/filament/admin/theme.css')            
             ->pages([
                 Pages\Dashboard::class,
             ])

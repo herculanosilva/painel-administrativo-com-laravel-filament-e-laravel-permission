@@ -68,7 +68,7 @@ class UserResource extends Resource
                     // ->dateTime('H:i:s d/m/Y')
                     ->since()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //
