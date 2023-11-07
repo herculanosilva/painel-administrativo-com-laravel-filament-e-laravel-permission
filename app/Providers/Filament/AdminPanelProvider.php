@@ -31,8 +31,19 @@ class AdminPanelProvider extends PanelProvider
             ->profile(EditProfile::class)
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Violet,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
+            ->font('Poppins')
+            ->brandName('Painel')
+            ->brandLogo(asset('images/logo.png'))
+            ->darkModeBrandLogo(asset('images/logo2.png'))
+            ->brandLogoHeight(fn() => auth()->check() ? '1.6rem' : '4rem')
+            ->favicon(asset('images/favicon.svg'))
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

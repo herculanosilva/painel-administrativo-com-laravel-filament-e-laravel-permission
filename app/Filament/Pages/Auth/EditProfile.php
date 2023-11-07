@@ -29,7 +29,7 @@ class EditProfile extends BaseEditProfile
     {
         return $form
             ->schema([
-                Section::make('Personal Information')
+                Section::make('Informações pessoais')
                     // alinhar o título e a descrição à esquerda, os componentes do formulário dentro de um cartão à direita
                     ->aside()
                     // separa os campos em seções, cada uma com um título e uma descrição

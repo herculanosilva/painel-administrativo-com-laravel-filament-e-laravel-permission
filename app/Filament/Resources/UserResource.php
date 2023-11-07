@@ -65,7 +65,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Ultima atualização')
-                    ->dateTime('H:i:s d/m/Y')
+                    // ->dateTime('H:i:s d/m/Y')
+                    ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
